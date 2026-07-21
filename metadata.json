@@ -1,0 +1,8 @@
+{
+  "name": "Remix: 台股即時前200-ET03",
+  "description": "提供台灣股市即時資訊看板，顯示台灣加權指數、熱門指標股及依漲幅排序的前 200 檔股票。支援即時價格跳動、5秒自動更新與 Excel 匯出功能。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,117 +1,117 @@
 {
   "twse": {
-    "length": 1371,
+    "length": 1377,
     "firstItem": {
-      "Date": "1150720",
+      "Date": "1150803",
       "Code": "00400A",
       "Name": "主動國泰動能高息",
-      "TradeVolume": "46471238",
-      "TradeValue": "592048012",
-      "OpeningPrice": "13.00",
-      "HighestPrice": "13.02",
-      "LowestPrice": "12.45",
-      "ClosingPrice": "12.72",
-      "Change": "-0.2700",
-      "Transaction": "12287"
+      "TradeVolume": "54905455",
+      "TradeValue": "725130876",
+      "OpeningPrice": "12.93",
+      "HighestPrice": "13.37",
+      "LowestPrice": "12.93",
+      "ClosingPrice": "13.25",
+      "Change": "0.3100",
+      "Transaction": "7524"
     },
     "positives": [
       {
-        "Date": "1150720",
-        "Code": "00402A",
-        "Name": "主動安聯美國科技",
-        "TradeVolume": "4770107",
-        "TradeValue": "45298365",
-        "OpeningPrice": "9.47",
-        "HighestPrice": "9.51",
-        "LowestPrice": "9.46",
-        "ClosingPrice": "9.48",
-        "Change": "0.0500",
-        "Transaction": "1031"
+        "Date": "1150803",
+        "Code": "00400A",
+        "Name": "主動國泰動能高息",
+        "TradeVolume": "54905455",
+        "TradeValue": "725130876",
+        "OpeningPrice": "12.93",
+        "HighestPrice": "13.37",
+        "LowestPrice": "12.93",
+        "ClosingPrice": "13.25",
+        "Change": "0.3100",
+        "Transaction": "7524"
       },
       {
-        "Date": "1150720",
-        "Code": "0053",
-        "Name": "元大電子",
-        "TradeVolume": "77845",
-        "TradeValue": "17226335",
-        "OpeningPrice": "222.65",
-        "HighestPrice": "222.85",
-        "LowestPrice": "217.10",
-        "ClosingPrice": "222.85",
-        "Change": "1.1000",
-        "Transaction": "2506"
+        "Date": "1150803",
+        "Code": "00401A",
+        "Name": "主動摩根台灣鑫收",
+        "TradeVolume": "9538199",
+        "TradeValue": "121445500",
+        "OpeningPrice": "12.55",
+        "HighestPrice": "12.83",
+        "LowestPrice": "12.47",
+        "ClosingPrice": "12.75",
+        "Change": "0.2000",
+        "Transaction": "852"
       },
       {
-        "Date": "1150720",
-        "Code": "0057",
-        "Name": "富邦摩台",
-        "TradeVolume": "137499",
-        "TradeValue": "40630314",
-        "OpeningPrice": "295.25",
-        "HighestPrice": "297.60",
-        "LowestPrice": "292.40",
-        "ClosingPrice": "297.60",
-        "Change": "1.9500",
-        "Transaction": "215"
+        "Date": "1150803",
+        "Code": "00403A",
+        "Name": "主動統一升級50",
+        "TradeVolume": "352344521",
+        "TradeValue": "3303864986",
+        "OpeningPrice": "9.20",
+        "HighestPrice": "9.49",
+        "LowestPrice": "9.20",
+        "ClosingPrice": "9.39",
+        "Change": "0.1400",
+        "Transaction": "41545"
       }
     ],
     "negatives": [
       {
-        "Date": "1150720",
-        "Code": "00400A",
-        "Name": "主動國泰動能高息",
-        "TradeVolume": "46471238",
-        "TradeValue": "592048012",
-        "OpeningPrice": "13.00",
-        "HighestPrice": "13.02",
-        "LowestPrice": "12.45",
-        "ClosingPrice": "12.72",
-        "Change": "-0.2700",
-        "Transaction": "12287"
+        "Date": "1150803",
+        "Code": "00402A",
+        "Name": "主動安聯美國科技",
+        "TradeVolume": "2195211",
+        "TradeValue": "20720298",
+        "OpeningPrice": "9.51",
+        "HighestPrice": "9.51",
+        "LowestPrice": "9.39",
+        "ClosingPrice": "9.49",
+        "Change": "-0.0200",
+        "Transaction": "697"
       },
       {
-        "Date": "1150720",
-        "Code": "00401A",
-        "Name": "主動摩根台灣鑫收",
-        "TradeVolume": "6848670",
-        "TradeValue": "84380994",
-        "OpeningPrice": "12.67",
-        "HighestPrice": "12.67",
-        "LowestPrice": "12.11",
-        "ClosingPrice": "12.32",
-        "Change": "-0.1800",
-        "Transaction": "910"
+        "Date": "1150803",
+        "Code": "0050",
+        "Name": "元大台灣50",
+        "TradeVolume": "169497151",
+        "TradeValue": "17265510345",
+        "OpeningPrice": "102.00",
+        "HighestPrice": "102.70",
+        "LowestPrice": "101.00",
+        "ClosingPrice": "102.00",
+        "Change": "-0.8500",
+        "Transaction": "148697"
       },
       {
-        "Date": "1150720",
-        "Code": "00403A",
-        "Name": "主動統一升級50",
-        "TradeVolume": "461738249",
-        "TradeValue": "4309793572",
-        "OpeningPrice": "9.54",
-        "HighestPrice": "9.55",
-        "LowestPrice": "9.13",
-        "ClosingPrice": "9.28",
-        "Change": "-0.2400",
-        "Transaction": "112527"
+        "Date": "1150803",
+        "Code": "0051",
+        "Name": "元大中型100",
+        "TradeVolume": "61249",
+        "TradeValue": "8158080",
+        "OpeningPrice": "129.25",
+        "HighestPrice": "134.40",
+        "LowestPrice": "129.25",
+        "ClosingPrice": "133.85",
+        "Change": "-0.1000",
+        "Transaction": "591"
       }
     ],
     "zeros": [
       {
-        "Date": "1150720",
-        "Code": "00408A",
-        "Name": "主動第一金優股息",
-        "TradeVolume": "16245591",
-        "TradeValue": "157636920",
-        "OpeningPrice": "9.78",
-        "HighestPrice": "9.78",
-        "LowestPrice": "9.55",
-        "ClosingPrice": "9.65",
+        "Date": "1150803",
+        "Code": "00625K",
+        "Name": "富邦上証+R",
+        "TradeVolume": "0",
+        "TradeValue": "0",
+        "OpeningPrice": "0.00",
+        "HighestPrice": "0.00",
+        "LowestPrice": "0.00",
+        "ClosingPrice": "0.00",
         "Change": "0.0000",
-        "Transaction": "1166"
+        "Transaction": "0"
       },
       {
-        "Date": "1150720",
+        "Date": "1150803",
         "Code": "00643K",
         "Name": "群益深証中小+R",
         "TradeVolume": "0",
@@ -124,92 +124,92 @@
         "Transaction": "0"
       },
       {
-        "Date": "1150720",
-        "Code": "00654R",
-        "Name": "富邦印度反1",
-        "TradeVolume": "75000",
-        "TradeValue": "502270",
-        "OpeningPrice": "6.66",
-        "HighestPrice": "6.74",
-        "LowestPrice": "6.66",
-        "ClosingPrice": "6.73",
+        "Date": "1150803",
+        "Code": "00771",
+        "Name": "元大US高息特別股",
+        "TradeVolume": "2355",
+        "TradeValue": "37093",
+        "OpeningPrice": "15.82",
+        "HighestPrice": "15.82",
+        "LowestPrice": "15.82",
+        "ClosingPrice": "15.82",
         "Change": "0.0000",
-        "Transaction": "7"
+        "Transaction": "62"
       }
     ],
     "rawChanges": [
       {
+        "symbol": "0050",
+        "name": "元大台灣50",
+        "change": "-0.8500",
+        "close": "102.00"
+      },
+      {
         "symbol": "0051",
         "name": "元大中型100",
-        "change": "-1.6000",
-        "close": "134.00"
+        "change": "-0.1000",
+        "close": "133.85"
       },
       {
         "symbol": "0052",
         "name": "富邦科技",
-        "change": "-0.3000",
-        "close": "57.60"
+        "change": "-0.5500",
+        "close": "59.15"
       },
       {
         "symbol": "0053",
         "name": "元大電子",
-        "change": "1.1000",
-        "close": "222.85"
+        "change": "1.4500",
+        "close": "228.80"
       },
       {
         "symbol": "0055",
         "name": "元大MSCI金融",
-        "change": "-0.3000",
-        "close": "41.52"
+        "change": "-0.5400",
+        "close": "44.15"
       },
       {
         "symbol": "0056",
         "name": "元大高股息",
-        "change": "-0.8000",
-        "close": "49.95"
+        "change": "0.3400",
+        "close": "49.82"
       },
       {
         "symbol": "0057",
         "name": "富邦摩台",
-        "change": "1.9500",
-        "close": "297.60"
+        "change": "-2.3000",
+        "close": "303.80"
       },
       {
         "symbol": "0061",
         "name": "元大寶滬深",
-        "change": "0.2600",
-        "close": "24.32"
+        "change": "-0.4300",
+        "close": "24.46"
       },
       {
         "symbol": "006203",
         "name": "元大MSCI台灣",
-        "change": "0.2500",
-        "close": "181.00"
+        "change": "0.9000",
+        "close": "185.65"
       },
       {
         "symbol": "006204",
         "name": "永豐臺灣加權",
-        "change": "-0.2000",
-        "close": "214.70"
-      },
-      {
-        "symbol": "006205",
-        "name": "富邦上証",
-        "change": "0.4800",
-        "close": "40.20"
+        "change": "0.1500",
+        "close": "215.50"
       }
     ]
   },
   "tpex": "not fetched",
   "fmtqik": {
-    "length": 13,
+    "length": 1,
     "firstItem": {
-      "Date": "1150720",
-      "TradeVolume": "12566601514",
-      "TradeValue": "1041457434398",
-      "Transaction": "5674801",
-      "TAIEX": "42449.70",
-      "Change": "-221.57"
+      "Date": "1150803",
+      "TradeVolume": "11427047935",
+      "TradeValue": "885506043091",
+      "Transaction": "4191882",
+      "TAIEX": "43386.41",
+      "Change": "266.66"
     },
     "keys": [
       "Date",
@@ -224,16 +224,16 @@
   "tpex_variants": {
     "openapi_https": {
       "success": true,
-      "length": 10072,
+      "length": 10199,
       "firstItem": {
         "Code": "006201",
         "Name": "元大富櫃50",
-        "ClosingPrice": "41.69",
-        "Change": "+1.89",
-        "OpeningPrice": "40.39",
-        "HighPrice": "41.72",
-        "LowPrice": "40.37",
-        "TradeVolume": "229,881"
+        "ClosingPrice": "39.88",
+        "Change": "+1.81",
+        "OpeningPrice": "38.30",
+        "HighPrice": "40.19",
+        "LowPrice": "38.30",
+        "TradeVolume": "659,766"
       },
       "keys": [
         "Code",
@@ -248,16 +248,16 @@
     },
     "www_https": {
       "success": true,
-      "length": 10072,
+      "length": 10199,
       "firstItem": {
         "Code": "006201",
         "Name": "元大富櫃50",
-        "ClosingPrice": "41.69",
-        "Change": "+1.89",
-        "OpeningPrice": "40.39",
-        "HighPrice": "41.72",
-        "LowPrice": "40.37",
-        "TradeVolume": "229,881"
+        "ClosingPrice": "39.88",
+        "Change": "+1.81",
+        "OpeningPrice": "38.30",
+        "HighPrice": "40.19",
+        "LowPrice": "38.30",
+        "TradeVolume": "659,766"
       },
       "keys": [
         "Code",
@@ -272,16 +272,16 @@
     },
     "openapi_http": {
       "success": true,
-      "length": 10072,
+      "length": 10199,
       "firstItem": {
         "Code": "006201",
         "Name": "元大富櫃50",
-        "ClosingPrice": "41.69",
-        "Change": "+1.89",
-        "OpeningPrice": "40.39",
-        "HighPrice": "41.72",
-        "LowPrice": "40.37",
-        "TradeVolume": "229,881"
+        "ClosingPrice": "39.88",
+        "Change": "+1.81",
+        "OpeningPrice": "38.30",
+        "HighPrice": "40.19",
+        "LowPrice": "38.30",
+        "TradeVolume": "659,766"
       },
       "keys": [
         "Code",
@@ -296,16 +296,16 @@
     },
     "www_http": {
       "success": true,
-      "length": 10072,
+      "length": 10199,
       "firstItem": {
         "Code": "006201",
         "Name": "元大富櫃50",
-        "ClosingPrice": "41.69",
-        "Change": "+1.89",
-        "OpeningPrice": "40.39",
-        "HighPrice": "41.72",
-        "LowPrice": "40.37",
-        "TradeVolume": "229,881"
+        "ClosingPrice": "39.88",
+        "Change": "+1.81",
+        "OpeningPrice": "38.30",
+        "HighPrice": "40.19",
+        "LowPrice": "38.30",
+        "TradeVolume": "659,766"
       },
       "keys": [
         "Code",

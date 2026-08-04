@@ -17,7 +17,7 @@ import {
   Calendar
 } from "lucide-react";
 import { Stock, UserProfile, TriggeredNotification, Watchlist, PriceAlert } from "./types";
-import { generate200Stocks, simulateTick } from "./data/stocks";
+import { generate200Stocks, simulateTick, BASE_STOCKS_DATA } from "./data/stocks";
 import StockSearchBox from "./components/StockSearchBox";
 import PinnedStocksGrid from "./components/PinnedStocksGrid";
 import StockRow from "./components/StockRow";
@@ -120,7 +120,7 @@ export default function App() {
     stocksRef.current = stocks;
   }, [stocks]);
 
-  // Load real-time stocks from backend
+  // Load real-time stocks from backend, with direct public API CORS proxy fallback for GitHub Pages static deployment
   const fetchStocksFromAPI = async () => {
     try {
       const res = await fetch("/api/stocks");
@@ -132,10 +132,218 @@ export default function App() {
         }
       }
     } catch (err) {
-      console.error("Failed to fetch real-time stocks:", err);
+      console.warn("Local backend API not available, trying public CORS proxy fallback...", err);
     }
     
-    // Fallback to offline generation if API is not available/failed
+    // Fallback: Fetch directly from TWSE and TPEx OpenAPIs using allorigins CORS proxy
+    try {
+      const twseUrl = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL";
+      const tpexUrl = "https://openapi.tpex.org.tw/v1/exchangeReport/STOCK_DAY_ALL";
+      
+      const proxyTwseUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(twseUrl)}`;
+      const proxyTpexUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(tpexUrl)}`;
+      
+      const [twseRes, tpexRes] = await Promise.all([
+        fetch(proxyTwseUrl).then(r => r.ok ? r.json() : null),
+        fetch(proxyTpexUrl).then(r => r.ok ? r.json() : null)
+      ]);
+      
+      const rawTwse = twseRes && twseRes.contents ? JSON.parse(twseRes.contents) : [];
+      const rawTpex = tpexRes && tpexRes.contents ? JSON.parse(tpexRes.contents) : [];
+      
+      if (rawTwse.length > 0 || rawTpex.length > 0) {
+        // Parse float helper
+        const cleanFloat = (val: any): number => {
+          if (val === undefined || val === null) return 0;
+          const str = String(val).replace(/,/g, "").trim();
+          if (str === "" || str === "--") return 0;
+          const num = parseFloat(str);
+          return isNaN(num) ? 0 : num;
+        };
+        
+        // Parse int helper
+        const cleanInt = (val: any): number => {
+          if (val === undefined || val === null) return 0;
+          const str = String(val).replace(/,/g, "").trim();
+          if (str === "" || str === "--") return 0;
+          const num = parseInt(str, 10);
+          return isNaN(num) ? 0 : num;
+        };
+
+        const list: Stock[] = [];
+        const processedSymbols = new Set<string>();
+
+        // 1. Initialise TAIEX index first (Symbol: IX0001)
+        const baseTaiex = rawTwse.find((item: any) => String(item.Code || item.code).trim() === "0000") || {
+          ClosingPrice: "22530.45",
+          OpeningPrice: "22410.00",
+          Change: "120.45"
+        };
+        const taiexPrice = cleanFloat(baseTaiex.ClosingPrice);
+        const taiexOpen = cleanFloat(baseTaiex.OpeningPrice) || taiexPrice;
+        const taiexChange = cleanFloat(baseTaiex.Change);
+        const taiexChangePercent = taiexOpen > 0 ? (taiexChange / taiexOpen) * 100 : 0;
+        
+        const taiexHistory: number[] = [];
+        let tempPrice = taiexOpen;
+        for (let i = 0; i < 15; i++) {
+          tempPrice = tempPrice * (1 + (Math.random() * 0.004 - 0.002));
+          taiexHistory.push(parseFloat(tempPrice.toFixed(2)));
+        }
+        taiexHistory[taiexHistory.length - 1] = taiexPrice;
+
+        list.push({
+          symbol: "IX0001",
+          name: "台灣加權指數",
+          price: parseFloat(taiexPrice.toFixed(2)),
+          openPrice: parseFloat(taiexOpen.toFixed(2)),
+          change: parseFloat(taiexChange.toFixed(2)),
+          changePercent: parseFloat(taiexChangePercent.toFixed(2)),
+          volume: 250000,
+          history: taiexHistory,
+          category: "指數",
+          marketCap: 625300,
+          peRatio: 22.4,
+          dividendYield: 3.05,
+          high52Week: parseFloat((taiexPrice * 1.1).toFixed(2)),
+          low52Week: parseFloat((taiexPrice * 0.9).toFixed(2)),
+          majorBuyPercent: 50,
+        });
+
+        // Combine raw items
+        const combinedRaw: any[] = [];
+        const handleRawItem = (item: any, isOtc: boolean) => {
+          const code = String(item.Code || item.code || "").trim();
+          const name = String(item.Name || item.name || "").trim();
+          if (!code || !name) return;
+          if (processedSymbols.has(code)) return;
+
+          const isNumeric = /^\d+$/.test(code);
+          if (!isNumeric) return;
+
+          const isStandardStock = code.length === 4;
+          const isEtf = code.startsWith("00") && (code.length === 4 || code.length === 5 || code.length === 6);
+          if (!isStandardStock && !isEtf) return;
+          if (name.includes("購") || name.includes("售")) return;
+
+          processedSymbols.add(code);
+          combinedRaw.push({ item, isOtc, code });
+        };
+
+        rawTwse.forEach((item: any) => handleRawItem(item, false));
+        rawTpex.forEach((item: any) => handleRawItem(item, true));
+
+        // Fill missing BASE_STOCKS_DATA with defaults if not fetched
+        BASE_STOCKS_DATA.forEach(base => {
+          if (!processedSymbols.has(base.symbol)) {
+            processedSymbols.add(base.symbol);
+            combinedRaw.push({
+              item: {
+                Code: base.symbol,
+                Name: base.name,
+                ClosingPrice: String(base.price),
+                OpeningPrice: String(base.price),
+                Change: "0.0",
+                TradeVolume: String(base.volume)
+              },
+              isOtc: false,
+              code: base.symbol
+            });
+          }
+        });
+
+        // Map and parse all items
+        combinedRaw.forEach(({ item, isOtc, code }) => {
+          const price = cleanFloat(item.ClosingPrice || item.ClosingPricePrice || item.closePrice || item.z || item.price);
+          if (price <= 0) return;
+
+          const rawOpen = cleanFloat(item.OpeningPrice || item.OpeningPricePrice || item.o);
+          const openPrice = rawOpen > 0 ? rawOpen : price;
+
+          const changeStr = String(item.Change || item.change || "0");
+          let change = cleanFloat(changeStr);
+          if (changeStr.includes("-") && change > 0) change = -change;
+
+          const changePercent = openPrice > 0 ? parseFloat(((change / openPrice) * 100).toFixed(2)) : 0;
+          const volume = cleanInt(item.TradeVolume || item.TradeVolumeVolume || item.v || item.volume || "1000");
+
+          let category = isOtc ? "櫃買股票" : "上市股票";
+          const baseMatch = BASE_STOCKS_DATA.find(s => s.symbol === code);
+          if (baseMatch) {
+            category = baseMatch.category;
+          } else {
+            if (code.startsWith("00")) {
+              category = "ETF";
+            } else if (code.startsWith("23") || code.startsWith("24") || code.startsWith("37") || code.startsWith("30")) {
+              category = "半導體";
+            } else if (code.startsWith("28")) {
+              category = "金融保險";
+            } else if (code.startsWith("26")) {
+              category = "航運業";
+            } else if (code.startsWith("20")) {
+              category = "鋼鐵工業";
+            } else if (code.startsWith("13")) {
+              category = "塑膠工業";
+            } else if (code.startsWith("17")) {
+              category = "生技醫療";
+            }
+          }
+
+          const history: number[] = [];
+          let p = openPrice;
+          for (let i = 0; i < 15; i++) {
+            p = p * (1 + (Math.random() * 0.008 - 0.004));
+            history.push(parseFloat(p.toFixed(2)));
+          }
+          history[history.length - 1] = price;
+
+          let marketCap = Math.floor(openPrice * (5 + Math.random() * 8));
+          if (code === "2330") marketCap = 25540;
+          if (code === "2317") marketCap = 2668;
+          if (code === "2454") marketCap = 2144;
+
+          let peRatio = parseFloat((12 + Math.random() * 25).toFixed(1));
+          if (category === "金融保險") peRatio = parseFloat((8 + Math.random() * 6).toFixed(1));
+          if (category === "生技醫療") peRatio = parseFloat((20 + Math.random() * 30).toFixed(1));
+          if (category === "ETF") peRatio = parseFloat((15 + Math.random() * 10).toFixed(1));
+
+          let dividendYield = parseFloat((1.5 + Math.random() * 6).toFixed(2));
+          if (category === "ETF" && (item.Name || item.name || "").includes("高息")) {
+            dividendYield = parseFloat((6.5 + Math.random() * 4).toFixed(2));
+          }
+
+          const high52 = parseFloat((price * (1 + 0.05 + Math.random() * 0.25)).toFixed(2));
+          const low52 = parseFloat((price * (1 - 0.05 - Math.random() * 0.30)).toFixed(2));
+
+          list.push({
+            symbol: code,
+            name: item.Name || item.name || "",
+            price,
+            openPrice,
+            change,
+            changePercent,
+            volume,
+            history,
+            category,
+            marketCap,
+            peRatio,
+            dividendYield,
+            high52Week: high52,
+            low52Week: low52,
+            majorBuyPercent: Math.max(10, Math.min(90, parseFloat((50 + changePercent * 2.5 + (Math.random() * 10 - 5)).toFixed(1)))),
+          });
+        });
+
+        if (list.length > 5) {
+          setStocks(list);
+          return;
+        }
+      }
+    } catch (fallbackErr) {
+      console.error("Failed to fetch from public CORS proxy fallback:", fallbackErr);
+    }
+
+    // Fallback to offline generation if everything else fails
     setStocks((current) => {
       if (current.length === 0) {
         return generate200Stocks();
